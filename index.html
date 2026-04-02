@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Tours – חתונה אזרחית בחו"ל</title>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:      #c9a96e;
+      --gold-light:#e8d5b0;
+      --gold-dark: #a07840;
+      --cream:     #faf7f2;
+      --dark:      #1a1208;
+      --text:      #3d2e14;
+      --muted:     #8a7a62;
+      --white:     #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Assistant', sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: var(--dark);
+      color: var(--gold-light);
+      font-size: .82rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: .45rem 1rem;
+    }
+    .topbar a { color: var(--gold-light); text-decoration: none; display: flex; align-items: center; gap: .35rem; }
+    .topbar a:hover { color: var(--gold); }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250,247,242,.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--gold-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .8rem 4rem;
+      gap: 1rem;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--dark);
+      white-space: nowrap;
+      letter-spacing: .03em;
+    }
+    .logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      font-size: .92rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color .2s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 0; height: 1.5px;
+      background: var(--gold);
+      transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--gold-dark); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--white) !important;
+      padding: .5rem 1.3rem;
+      border-radius: 30px;
+      transition: background .2s !important;
+    }
+    .nav-cta:hover { background: var(--gold-dark) !important; }
+    .nav-cta::after { display: none !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0d0906 0%, #2a1a08 50%, #1a1208 100%);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1800&q=80') center/cover no-repeat;
+      opacity: .35;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 50%, transparent 30%, rgba(10,6,2,.7) 100%);
+    }
+    .hero-content {
+      position: relative;
+      text-align: center;
+      color: var(--white);
+      max-width: 750px;
+      padding: 2rem;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: .78rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: .3rem .9rem;
+      border-radius: 30px;
+      margin-bottom: 1.4rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 em { color: var(--gold); font-style: italic; }
+    .hero p {
+      font-size: 1.12rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,.82);
+      margin-bottom: 2.2rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--dark);
+      padding: .85rem 2.2rem;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: .95rem;
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+    }
+    .btn-primary:hover { background: var(--gold-dark); color: #fff; transform: translateY(-2px); }
+    .btn-outline {
+      border: 1.5px solid rgba(255,255,255,.5);
+      color: var(--white);
+      padding: .85rem 2.2rem;
+      border-radius: 30px;
+      font-size: .95rem;
+      text-decoration: none;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(201,169,110,.15); }
+
+    /* ── STATS BAR ── */
+    .stats {
+      background: var(--dark);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .stat {
+      flex: 1;
+      min-width: 150px;
+      text-align: center;
+      padding: 1.8rem 1rem;
+      border-left: 1px solid rgba(255,255,255,.07);
+    }
+    .stat:last-child { border-left: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--gold);
+      font-weight: 700;
+      display: block;
+    }
+    .stat-label { font-size: .8rem; color: rgba(255,255,255,.55); letter-spacing: .05em; margin-top: .2rem; }
+
+    /* ── SECTION HELPERS ── */
+    section { padding: 6rem 2rem; }
+    .section-tag {
+      display: inline-block;
+      font-size: .75rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .7rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--dark);
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+      margin: 0 auto;
+    }
+    .center { text-align: center; }
+    .divider {
+      width: 50px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.2rem auto;
+      border-radius: 2px;
+    }
+
+    /* ── DESTINATIONS ── */
+    .destinations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 3.5rem auto 0;
+    }
+    .dest-card {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 3/4;
+      cursor: pointer;
+      box-shadow: 0 8px 30px rgba(0,0,0,.12);
+      transition: transform .35s, box-shadow .35s;
+    }
+    .dest-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,.2); }
+    .dest-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .6s;
+    }
+    .dest-card:hover img { transform: scale(1.06); }
+    .dest-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,6,2,.85) 0%, rgba(10,6,2,.1) 55%, transparent 100%);
+    }
+    .dest-card-body {
+      position: absolute;
+      bottom: 0;
+      right: 0; left: 0;
+      padding: 1.5rem 1.4rem;
+      color: var(--white);
+    }
+    .dest-flag { font-size: 1.6rem; margin-bottom: .4rem; }
+    .dest-card-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      margin-bottom: .3rem;
+    }
+    .dest-card-body p { font-size: .83rem; color: rgba(255,255,255,.72); line-height: 1.5; }
+    .dest-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--gold);
+      color: var(--dark);
+      font-size: .72rem;
+      font-weight: 700;
+      padding: .3rem .75rem;
+      border-radius: 20px;
+    }
+
+    /* ── PACKAGES ── */
+    .packages-bg { background: linear-gradient(160deg, #f5efe4 0%, var(--cream) 100%); }
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 3.5rem auto 0;
+    }
+    .pkg-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2rem 1.8rem;
+      border: 1px solid var(--gold-light);
+      text-align: center;
+      transition: box-shadow .3s, transform .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .pkg-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
+    }
+    .pkg-card:hover { box-shadow: 0 12px 40px rgba(201,169,110,.18); transform: translateY(-4px); }
+    .pkg-icon { font-size: 2.4rem; margin-bottom: 1rem; }
+    .pkg-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--dark);
+      margin-bottom: .6rem;
+    }
+    .pkg-card p { font-size: .9rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.4rem; }
+    .pkg-link {
+      color: var(--gold-dark);
+      font-weight: 700;
+      font-size: .85rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+    }
+    .pkg-link:hover { color: var(--gold); }
+
+    /* ── WHY US ── */
+    .why-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .why-img {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/5;
+      box-shadow: 0 20px 60px rgba(0,0,0,.15);
+    }
+    .why-img img { width: 100%; height: 100%; object-fit: cover; }
+    .why-img-badge {
+      position: absolute;
+      bottom: 1.8rem;
+      left: 1.8rem;
+      background: var(--dark);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      font-size: .85rem;
+    }
+    .why-img-badge span { color: var(--gold); font-size: 1.6rem; font-family: 'Playfair Display', serif; font-weight: 700; display: block; }
+    .why-points { display: flex; flex-direction: column; gap: 1.4rem; margin-top: 2.2rem; }
+    .why-point { display: flex; gap: 1rem; align-items: flex-start; }
+    .why-icon {
+      min-width: 46px; height: 46px;
+      background: var(--gold-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+    }
+    .why-point h4 { font-size: .97rem; font-weight: 700; color: var(--dark); margin-bottom: .25rem; }
+    .why-point p { font-size: .87rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-bg { background: var(--dark); }
+    .testimonials-bg .section-title { color: var(--white); }
+    .testimonials-bg .section-sub { color: rgba(255,255,255,.6); }
+    .testimonials-bg .section-tag { color: var(--gold); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 3.5rem auto 0;
+    }
+    .testi-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(201,169,110,.2);
+      border-radius: 16px;
+      padding: 2rem 1.8rem;
+      transition: background .3s;
+    }
+    .testi-card:hover { background: rgba(201,169,110,.08); }
+    .testi-stars { color: var(--gold); font-size: 1rem; letter-spacing: .1em; margin-bottom: 1rem; }
+    .testi-card blockquote {
+      font-size: .92rem;
+      color: rgba(255,255,255,.8);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 1.4rem;
+    }
+    .testi-author { display: flex; align-items: center; gap: .8rem; }
+    .testi-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 700; color: var(--white);
+      font-family: 'Playfair Display', serif;
+    }
+    .testi-name { font-weight: 700; color: var(--white); font-size: .9rem; }
+    .testi-dest { font-size: .78rem; color: var(--gold); margin-top: .1rem; }
+
+    /* ── PROCESS ── */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0;
+      max-width: 1000px;
+      margin: 3.5rem auto 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 2rem;
+      right: 10%; left: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    }
+    .step { text-align: center; padding: 0 1rem; position: relative; }
+    .step-num {
+      width: 4rem; height: 4rem;
+      border-radius: 50%;
+      background: var(--white);
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .step h4 { font-size: .97rem; font-weight: 700; color: var(--dark); margin-bottom: .4rem; }
+    .step p { font-size: .83rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: linear-gradient(135deg, #1a1208 0%, #3a2510 50%, #1a1208 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a96e' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cta-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: var(--white);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .cta-banner h2 em { color: var(--gold); font-style: italic; }
+    .cta-banner p { color: rgba(255,255,255,.65); font-size: 1.05rem; margin-bottom: 2.2rem; position: relative; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+    .btn-wa {
+      background: #25D366;
+      color: #fff;
+      padding: .85rem 2rem;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: .95rem;
+      text-decoration: none;
+      display: flex; align-items: center; gap: .5rem;
+      transition: background .2s, transform .2s;
+    }
+    .btn-wa:hover { background: #128C7E; transform: translateY(-2px); }
+    .btn-phone {
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      padding: .85rem 2rem;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: .95rem;
+      text-decoration: none;
+      display: flex; align-items: center; gap: .5rem;
+      transition: background .2s;
+    }
+    .btn-phone:hover { background: rgba(201,169,110,.15); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0d0906;
+      color: rgba(255,255,255,.55);
+      padding: 3.5rem 2rem 1.5rem;
+      font-size: .85rem;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .footer-brand .logo { font-size: 1.3rem; margin-bottom: .8rem; display: block; }
+    .footer-brand p { line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { color: var(--gold); font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+    .footer-col a { color: rgba(255,255,255,.55); text-decoration: none; transition: color .2s; }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 1.5rem auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .footer-bottom a { color: var(--gold); text-decoration: none; }
+
+    /* ── FLOATING WA ── */
+    .floating-wa {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      background: #25D366;
+      color: #fff;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 20px rgba(37,211,102,.4);
+      text-decoration: none;
+      z-index: 999;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .floating-wa:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,.5); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: .8rem 1.5rem; }
+      .nav-links { display: none; }
+      .why-wrap { grid-template-columns: 1fr; }
+      .why-img { max-width: 440px; margin: 0 auto; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .process-steps::before { display: none; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 4rem 1.2rem; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .stat { min-width: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="tel:0366166956">📞 03-6166956</a>
+  <a href="https://wa.me/972535533840" target="_blank">💬 WhatsApp: 053-5533840</a>
+  <a href="https://www.facebook.com/profile.php?id=100068946745762" target="_blank">📘 פייסבוק</a>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <span class="logo">Wedding <span>Tours</span></span>
+  <ul class="nav-links">
+    <li><a href="#destinations">יעדים</a></li>
+    <li><a href="#packages">חבילות</a></li>
+    <li><a href="#why">למה אנחנו</a></li>
+    <li><a href="#process">תהליך</a></li>
+    <li><a href="#testimonials">המלצות</a></li>
+    <li><a href="#contact" class="nav-cta">צרו קשר</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">חתונות אזרחיות בחו"ל</div>
+    <h1>הגשימו את חלום<br/><em>החתונה שלכם</em><br/>מחוץ לארץ</h1>
+    <p>אנחנו מתכננים עבורכם חתונה אזרחית מושלמת בקפריסין, צ'כיה, גאורגיה ועוד –<br/>כל הפרטים מטופלים, אתם רק נהנים.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">קבלו הצעת מחיר</a>
+      <a href="#destinations" class="btn-outline">גלו את היעדים</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><span class="stat-num">500+</span><span class="stat-label">זוגות שמחים</span></div>
+  <div class="stat"><span class="stat-num">3</span><span class="stat-label">יעדים בינלאומיים</span></div>
+  <div class="stat"><span class="stat-num">10+</span><span class="stat-label">שנות ניסיון</span></div>
+  <div class="stat"><span class="stat-num">100%</span><span class="stat-label">ליווי אישי</span></div>
+</div>
+
+<!-- DESTINATIONS -->
+<section id="destinations">
+  <div class="center">
+    <span class="section-tag">היעדים שלנו</span>
+    <h2 class="section-title">בחרו את המקום המושלם<br/>לחתונה שלכם</h2>
+    <div class="divider"></div>
+    <p class="section-sub">מן חוף הים הכחול בקפריסין ועד ל טירות הקסומות של צ'כיה – כל יעד מציע חוויה ייחודית ובלתי נשכחת.</p>
+  </div>
+
+  <div class="destinations-grid">
+    <!-- Cyprus -->
+    <div class="dest-card">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="קפריסין" />
+      <div class="dest-card-overlay"></div>
+      <div class="dest-badge">הכי פופולרי</div>
+      <div class="dest-card-body">
+        <div class="dest-flag">🇨🇾</div>
+        <h3>קפריסין</h3>
+        <p>חתונה אזרחית מול הים התיכון. אגיה נאפה, לימסול, לרנקה ופאפוס.</p>
+      </div>
+    </div>
+    <!-- Prague -->
+    <div class="dest-card">
+      <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=600&q=80" alt="פראג" />
+      <div class="dest-card-overlay"></div>
+      <div class="dest-card-body">
+        <div class="dest-flag">🇨🇿</div>
+        <h3>פראג וטירות צ'כיה</h3>
+        <p>טקסים רומנטיים בטירות הכי יפות באירופה, ובלבה הקסום של פראג.</p>
+      </div>
+    </div>
+    <!-- Georgia -->
+    <div class="dest-card">
+      <img src="https://images.unsplash.com/photo-1565008576549-57569a49371d?w=600&q=80" alt="גאורגיה" />
+      <div class="dest-card-overlay"></div>
+      <div class="dest-card-body">
+        <div class="dest-flag">🇬🇪</div>
+        <h3>גאורגיה</h3>
+        <p>טקס חתונה ציורי בסיגנאחי – עיר האהבה – או על הר מתסמינדה.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages" class="packages-bg">
+  <div class="center">
+    <span class="section-tag">החבילות שלנו</span>
+    <h2 class="section-title">חבילה לכל זוג</h2>
+    <div class="divider"></div>
+    <p class="section-sub">בחרו את החבילה המתאימה לכם, ואנחנו נטפל בכל השאר.</p>
+  </div>
+
+  <div class="packages-grid">
+    <div class="pkg-card">
+      <div class="pkg-icon">💍</div>
+      <h3>חבילה בסיסית</h3>
+      <p>כל מה שצריך לחתונה אזרחית מהירה ומסודרת – מסמכים, קידה בעירייה, ואישור נישואין רשמי.</p>
+      <a href="#contact" class="pkg-link">לפרטים ←</a>
+    </div>
+    <div class="pkg-card">
+      <div class="pkg-icon">🌸</div>
+      <h3>חבילת פרימיום</h3>
+      <p>הכל כלול – טקס בלוקיישן מרהיב, צלם, פרחים, לינה, ועוד. חתונה שתישאר בזיכרון לנצח.</p>
+      <a href="#contact" class="pkg-link">לפרטים ←</a>
+    </div>
+    <div class="pkg-card">
+      <div class="pkg-icon">⚡</div>
+      <h3>חתונה ביום אחד</h3>
+      <p>הגעתם היום, נישאתם היום. מסלול מהיר ומיוחד לזוגות שרוצים פתרון מהיר ואלגנטי.</p>
+      <a href="#contact" class="pkg-link">לפרטים ←</a>
+    </div>
+    <div class="pkg-card">
+      <div class="pkg-icon">🌍</div>
+      <h3>לאומויות שונות</h3>
+      <p>מתמחים בזוגות בעלי לאומויות שונות – ניווט מלא בבירוקרטיה ועזרה בכל השלבים.</p>
+      <a href="#contact" class="pkg-link">לפרטים ←</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="why-wrap">
+    <div class="why-img">
+      <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&q=80" alt="חתונה" />
+      <div class="why-img-badge">
+        <span>500+</span>
+        זוגות שמחים
+      </div>
+    </div>
+    <div>
+      <span class="section-tag">למה לבחור בנו</span>
+      <h2 class="section-title">אנחנו עושים את זה<br/><em style="color:var(--gold);font-style:italic">פשוט ומושלם</em></h2>
+      <div class="divider" style="margin-right:0;margin-left:auto"></div>
+      <p style="color:var(--muted);font-size:.97rem;line-height:1.7;margin-top:1rem">עם למעלה מ-10 שנות ניסיון, Wedding Tours ליוותה מאות זוגות ישראלים לחתונה החלומית שלהם בחו"ל.</p>
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-icon">📋</div>
+          <div>
+            <h4>טיפול מלא במסמכים</h4>
+            <p>אנחנו מטפלים בכל הניירת, הרישום, והאישורים הנדרשים – אתם לא צריכים להתעסק בבירוקרטיה.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">🤝</div>
+          <div>
+            <h4>ליווי אישי לאורך כל הדרך</h4>
+            <p>יש לכם שאלות? אנחנו כאן. נציג אישי זמין לכם מרגע יצירת הקשר ועד לחזרה הביתה.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">🌟</div>
+          <div>
+            <h4>ניסיון ומקצועיות</h4>
+            <p>הכרת מעמיקה של כל יעד, קשרים עם הרשויות המקומיות, וניסיון עם אלפי תיקים.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">💰</div>
+          <div>
+            <h4>מחירים שקופים</h4>
+            <p>ללא הפתעות. תקבלו הצעת מחיר מפורטת מראש – בדיוק מה שכלול וכמה עולה.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" style="background:linear-gradient(160deg,#f5efe4,var(--cream))">
+  <div class="center">
+    <span class="section-tag">איך זה עובד</span>
+    <h2 class="section-title">4 צעדים לחתונה שלכם</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>יצירת קשר</h4>
+      <p>פנו אלינו בטלפון, WhatsApp, או בטופס – ונקבע שיחת היכרות</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>תכנון מותאם</h4>
+      <p>נבחר יחד את היעד, התאריך, החבילה, והתוספות הרצויות</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>הכנת מסמכים</h4>
+      <p>אנחנו מדריכים אתכם צעד אחר צעד לגבי כל מסמך נדרש</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>היום המיוחד</h4>
+      <p>אתם מגיעים, אנחנו מטפלים בהכל. תיהנו מחתונה מושלמת!</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonials-bg">
+  <div class="center">
+    <span class="section-tag">המלצות</span>
+    <h2 class="section-title">מה הזוגות אומרים עלינו</h2>
+    <div class="divider"></div>
+    <p class="section-sub">מאות זוגות בחרו בנו לרגע הכי חשוב בחייהם.</p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <blockquote>"Wedding Tours עשו הכל נוח ומהנה! בקפריסין הכל היה מושלם – מהמסמכים עד לטקס עצמו. ממליצים בחום!"</blockquote>
+      <div class="testi-author">
+        <div class="testi-avatar">ד</div>
+        <div>
+          <div class="testi-name">דנה ואיתי</div>
+          <div class="testi-dest">🇨🇾 חתונה בלימסול</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <blockquote>"חתונה בטירה בצ'כיה – חלום שהפך למציאות. השירות היה מקצועי ואישי, והצוות שם לנו על כל פרט."</blockquote>
+      <div class="testi-author">
+        <div class="testi-avatar">מ</div>
+        <div>
+          <div class="testi-name">מורן ושחר</div>
+          <div class="testi-dest">🇨🇿 טירת ליבליצה, צ'כיה</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <blockquote>"היינו מודאגים מהבירוקרטיה כי אנחנו מלאומויות שונות, אבל הם טיפלו בהכל בשקט ובמקצועיות. תודה!"</blockquote>
+      <div class="testi-author">
+        <div class="testi-avatar">ר</div>
+        <div>
+          <div class="testi-name">רונה ודניאל</div>
+          <div class="testi-dest">🇬🇪 סיגנאחי, גאורגיה</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section id="contact" class="cta-banner">
+  <h2>מוכנים להגשים את<br/><em>החלום שלכם?</em></h2>
+  <p>פנו אלינו עוד היום לייעוץ חינם וללא התחייבות</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/972535533840" target="_blank" class="btn-wa">
+      💬 WhatsApp – 053-5533840
+    </a>
+    <a href="tel:0366166956" class="btn-phone">
+      📞 03-6166956
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo">Wedding <span>Tours</span></span>
+      <p>מתמחים בארגון חתונות אזרחיות לזוגות ישראלים בחו"ל. קפריסין, צ'כיה, גאורגיה ועוד.</p>
+    </div>
+    <div class="footer-col">
+      <h4>יעדים</h4>
+      <ul>
+        <li><a href="#destinations">קפריסין</a></li>
+        <li><a href="#destinations">פראג וצ'כיה</a></li>
+        <li><a href="#destinations">גאורגיה</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>שירותים</h4>
+      <ul>
+        <li><a href="#packages">חבילות חתונה</a></li>
+        <li><a href="#packages">שירותי מסמכים</a></li>
+        <li><a href="#packages">רישום נישואין</a></li>
+        <li><a href="#contact">צרו קשר</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Wedding Tours. כל הזכויות שמורות.</span>
+    <span>נבנה באהבה ❤️ לכבוד כל הזוגות</span>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/972535533840" class="floating-wa" target="_blank" title="צ'אט ב-WhatsApp">💬</a>
+
+</body>
+</html>
